@@ -4,8 +4,8 @@
 export const couple = {
   partnerOneFirstName: "McKenna",
   partnerTwoFirstName: "Colin",
-  weddingDateISO: "2027-06-12", // YYYY-MM-DD — update to your actual date
-  weddingDateDisplay: "June 12, 2027", // update to your actual date
+  weddingDateISO: "2027-01-02", // YYYY-MM-DD
+  weddingDateDisplay: "January 2, 2027",
   ceremonyTime: "4:00 PM", // update to your actual time
   venueName: "Siempre",
   venueAddress: "Draper, Utah",
