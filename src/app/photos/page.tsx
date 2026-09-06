@@ -7,10 +7,10 @@ import { PolaroidFrame } from "@/components/PolaroidFrame";
 export const metadata: Metadata = { title: "Photos" };
 export const dynamic = "force-dynamic";
 
-function PlaceholderTile() {
+function PlaceholderTile({ index }: { index: number }) {
   const initials = `${couple.partnerOneFirstName[0]}${couple.partnerTwoFirstName[0]}`;
   return (
-    <PolaroidFrame>
+    <PolaroidFrame tiltIndex={index}>
       <div className="flex h-full w-full items-center justify-center bg-ink/5">
         <p className="font-script text-2xl font-normal text-ink/40">{initials}</p>
       </div>
@@ -35,14 +35,14 @@ export default async function PhotosPage() {
       {photos.length === 0 ? (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <PlaceholderTile key={i} />
+            <PlaceholderTile key={i} index={i} />
           ))}
         </div>
       ) : (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
-          {photos.map((photo) => (
+          {photos.map((photo, i) => (
             <figure key={photo.id}>
-              <PolaroidFrame>
+              <PolaroidFrame tiltIndex={i}>
                 <Image
                   src={photo.url}
                   alt={photo.caption ?? ""}

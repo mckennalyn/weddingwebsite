@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { faqs, schedule } from "@/content/site";
 import { scheduleIcons } from "@/components/icons";
-import { WavyFrame } from "@/components/WavyFrame";
+import { PolaroidFrame } from "@/components/PolaroidFrame";
 
 export const metadata: Metadata = { title: "FAQs" };
 
@@ -38,17 +38,14 @@ export default function FaqPage() {
       <div className="mx-auto my-16 h-px w-full max-w-4xl bg-line" aria-hidden />
 
       <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 px-6 sm:grid-cols-[280px_1fr] sm:gap-16">
-        <div className="relative mx-auto h-85 w-70 sm:mx-0">
-          <div className="absolute inset-2.5 overflow-hidden">
-            <Image
-              src="/faq-details.jpg"
-              alt=""
-              fill
-              className="object-cover grayscale contrast-125"
-            />
-          </div>
-          <WavyFrame className="text-ink" />
-        </div>
+        <PolaroidFrame className="mx-auto h-85 w-70 sm:mx-0">
+          <Image
+            src="/faq-details.jpg"
+            alt=""
+            fill
+            className="object-cover grayscale contrast-125"
+          />
+        </PolaroidFrame>
 
         <dl>
           {faqs.map((item, i) => (
