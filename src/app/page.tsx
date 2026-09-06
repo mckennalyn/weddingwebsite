@@ -50,7 +50,7 @@ export default async function HomePage() {
       </nav>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-6 text-center">
-        <p className="letter-wide text-xs uppercase text-paper/65">
+        <p className="letter-wide text-xs font-medium uppercase text-paper/90">
           The Wedding Of
         </p>
         <h1 className="mt-5 font-display text-6xl leading-[0.92] font-normal text-paper italic sm:text-8xl">
@@ -62,7 +62,7 @@ export default async function HomePage() {
         <p className="font-display text-xl text-paper sm:text-2xl">
           {couple.weddingDateDisplay}
         </p>
-        <p className="letter-wide mt-2 mb-10 text-xs uppercase text-paper/75">
+        <p className="letter-wide mt-2 mb-10 text-xs font-medium uppercase text-paper/90">
           {couple.venueName} &middot; {couple.venueAddress}
         </p>
         <Link

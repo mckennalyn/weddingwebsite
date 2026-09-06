@@ -16,7 +16,7 @@ export default function FaqPage() {
       </div>
 
       <div className="mx-auto mt-14 max-w-4xl px-6">
-        <p className="letter-wide text-center text-xs uppercase text-ink/50">
+        <p className="letter-wide text-center text-xs font-medium uppercase text-ink/70">
           The Day&apos;s Timeline
         </p>
         <div className="mt-9 grid grid-cols-3 gap-5 sm:grid-cols-5">
@@ -26,7 +26,7 @@ export default function FaqPage() {
               <div key={item.label} className="flex flex-col items-center text-center">
                 <Icon className="text-ink" />
                 <p className="font-display mt-3.5 text-lg text-ink">{item.time}</p>
-                <p className="letter-wide text-[10px] uppercase text-ink/55">
+                <p className="letter-wide text-[10px] font-medium uppercase text-ink/70">
                   {item.label}
                 </p>
               </div>

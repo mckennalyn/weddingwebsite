@@ -101,7 +101,7 @@ export function RsvpFlow() {
         </p>
         <button
           type="button"
-          className="letter-wide mt-8 text-xs uppercase text-ink/60 underline hover:text-ink"
+          className="letter-wide mt-8 text-xs font-medium uppercase text-ink/65 underline hover:text-ink"
           onClick={() => {
             setSelected(null);
             setResponses({});
@@ -180,7 +180,7 @@ export function RsvpFlow() {
           <button
             type="button"
             onClick={() => setSelected(null)}
-            className="letter-wide text-xs uppercase text-ink/50 hover:text-ink"
+            className="letter-wide text-xs font-medium uppercase text-ink/65 hover:text-ink"
           >
             Not your invitation? Search again
           </button>
@@ -191,7 +191,7 @@ export function RsvpFlow() {
 
   return (
     <div>
-      <label className="letter-wide block text-center text-xs uppercase text-ink/60">
+      <label className="letter-wide block text-center text-xs font-medium uppercase text-ink/75">
         Find your invitation
       </label>
       <input

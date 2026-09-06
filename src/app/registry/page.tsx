@@ -29,7 +29,7 @@ export default function RegistryPage() {
           >
             <p className="font-display text-2xl text-ink">{item.name}</p>
             {item.description && (
-              <p className="letter-wide mt-2 mb-5 text-[10px] uppercase text-ink/50">
+              <p className="letter-wide mt-2 mb-5 text-[10px] font-medium uppercase text-ink/70">
                 {item.description}
               </p>
             )}

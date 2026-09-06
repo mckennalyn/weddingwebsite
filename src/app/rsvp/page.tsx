@@ -17,7 +17,7 @@ export default function RsvpPage() {
           We&apos;d love for you to celebrate with us. Find your invitation
           below and let us know if you can make it.
         </p>
-        <p className="letter-wide mt-5 text-xs uppercase text-paper/75">
+        <p className="letter-wide mt-5 text-xs font-medium uppercase text-paper/90">
           Please reply by {couple.rsvpByDisplay}
         </p>
       </div>
