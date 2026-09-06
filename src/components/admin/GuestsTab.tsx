@@ -16,21 +16,38 @@ function addressLines(h: HouseholdWithGuests) {
     .filter((line) => line && line.length > 0);
 }
 
-function StatusBadge({ status }: { status: RsvpStatus }) {
-  const styles: Record<RsvpStatus, string> = {
-    attending: "bg-gold-soft/40 text-gold-deep",
-    declined: "bg-ink/10 text-ink/60",
-    pending: "bg-transparent text-ink/40 border border-line",
-  };
-  const labels: Record<RsvpStatus, string> = {
-    attending: "Attending",
-    declined: "Declined",
-    pending: "Pending",
-  };
+function YesNoButtons({
+  status,
+  onSet,
+}: {
+  status: RsvpStatus;
+  onSet: (status: RsvpStatus) => void;
+}) {
   return (
-    <span className={`letter-wide rounded-full px-3 py-1 text-[10px] uppercase ${styles[status]}`}>
-      {labels[status]}
-    </span>
+    <div className="flex items-center gap-1.5">
+      <button
+        type="button"
+        onClick={() => onSet(status === "attending" ? "pending" : "attending")}
+        className={`letter-wide rounded-full border px-3 py-1 text-[10px] uppercase transition-colors ${
+          status === "attending"
+            ? "border-gold bg-gold text-paper"
+            : "border-line text-ink/50 hover:border-gold hover:text-gold-deep"
+        }`}
+      >
+        Yes
+      </button>
+      <button
+        type="button"
+        onClick={() => onSet(status === "declined" ? "pending" : "declined")}
+        className={`letter-wide rounded-full border px-3 py-1 text-[10px] uppercase transition-colors ${
+          status === "declined"
+            ? "border-ink/60 bg-ink/60 text-paper"
+            : "border-line text-ink/50 hover:border-ink hover:text-ink"
+        }`}
+      >
+        No
+      </button>
+    </div>
   );
 }
 
@@ -101,27 +118,21 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
       <div className="mt-4 divide-y divide-line">
         {household.guests.map((guest) => (
           <div key={guest.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
-            <p className="text-ink">
-              {guest.first_name} {guest.last_name}
-            </p>
+            <div>
+              <p className="text-ink">
+                {guest.first_name} {guest.last_name}
+              </p>
+              {guest.rsvp_status === "pending" && (
+                <p className="letter-wide text-[10px] uppercase text-ink/40">
+                  Awaiting response
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-2">
-              <StatusBadge status={guest.rsvp_status} />
-              <select
-                defaultValue=""
-                onChange={(e) => {
-                  const value = e.target.value as RsvpStatus;
-                  if (value) startTransition(() => setGuestRsvpStatus(guest.id, value));
-                  e.target.value = "";
-                }}
-                className="border border-line bg-paper px-2 py-1 text-xs text-ink/60 outline-none"
-              >
-                <option value="" disabled>
-                  Set status
-                </option>
-                <option value="attending">Attending</option>
-                <option value="declined">Declined</option>
-                <option value="pending">Pending</option>
-              </select>
+              <YesNoButtons
+                status={guest.rsvp_status}
+                onSet={(status) => startTransition(() => setGuestRsvpStatus(guest.id, status))}
+              />
               <button
                 type="button"
                 onClick={() => startTransition(() => deleteGuest(guest.id))}
