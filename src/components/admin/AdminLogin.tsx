@@ -8,7 +8,7 @@ export function AdminLogin() {
 
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-sm flex-col items-center justify-center px-6 text-center">
-      <p className="letter-wide text-xs uppercase text-ink/50">
+      <p className="letter-wide text-xs uppercase text-ink/70">
         Administration
       </p>
       <form action={action} className="mt-8 w-full">
@@ -17,7 +17,7 @@ export function AdminLogin() {
           name="password"
           placeholder="Password"
           autoFocus
-          className="w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-xl text-ink outline-none focus:border-gold"
+          className="w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-xl text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         {state?.error && (
           <p className="mt-3 text-sm text-red-700">{state.error}</p>

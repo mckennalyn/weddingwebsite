@@ -53,14 +53,14 @@ export function AddHouseholdForm() {
       className="mx-auto max-w-lg space-y-6"
     >
       <div>
-        <label className="letter-wide block text-xs uppercase text-ink/60">
+        <label className="letter-wide block text-xs uppercase text-ink/70">
           Household label
         </label>
         <input
           name="label"
           placeholder="The Smith Family"
           required
-          className="mt-2 w-full border border-line px-4 py-2 outline-none focus:border-gold"
+          className="mt-2 w-full border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
       </div>
 
@@ -68,37 +68,37 @@ export function AddHouseholdForm() {
         <input
           name="addressLine1"
           placeholder="Address line 1"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         <input
           name="addressLine2"
           placeholder="Address line 2"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         <input
           name="city"
           placeholder="City"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         <input
           name="state"
           placeholder="State"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         <input
           name="postalCode"
           placeholder="Postal code"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
         <input
           name="country"
           placeholder="Country"
-          className="border border-line px-4 py-2 outline-none focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
         />
       </div>
 
       <div>
-        <p className="letter-wide text-xs uppercase text-ink/60">Guests</p>
+        <p className="letter-wide text-xs uppercase text-ink/70">Guests</p>
         <div className="mt-3 space-y-3">
           {guestRows.map((row, i) => (
             <div key={i} className="flex gap-3">
@@ -108,7 +108,7 @@ export function AddHouseholdForm() {
                 onChange={(e) => updateRow(i, "firstName", e.target.value)}
                 placeholder="First name"
                 required
-                className="flex-1 border border-line px-4 py-2 outline-none focus:border-gold"
+                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
               />
               <input
                 name="guestLastName"
@@ -116,13 +116,13 @@ export function AddHouseholdForm() {
                 onChange={(e) => updateRow(i, "lastName", e.target.value)}
                 placeholder="Last name"
                 required
-                className="flex-1 border border-line px-4 py-2 outline-none focus:border-gold"
+                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/50 focus:border-gold"
               />
               {guestRows.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeRow(i)}
-                  className="px-2 text-ink/40 hover:text-ink"
+                  className="px-2 text-ink/70 hover:text-ink"
                   aria-label="Remove guest"
                 >
                   &times;

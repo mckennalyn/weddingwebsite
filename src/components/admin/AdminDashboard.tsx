@@ -30,7 +30,7 @@ export function AdminDashboard({
       <div className="flex items-center justify-between">
         <h1 className="font-display text-3xl italic text-ink">Administration</h1>
         <form action={logoutAdmin}>
-          <button type="submit" className="letter-wide text-xs uppercase text-ink/50 hover:text-ink">
+          <button type="submit" className="letter-wide text-xs uppercase text-ink/70 hover:text-ink">
             Log out
           </button>
         </form>
@@ -43,7 +43,7 @@ export function AdminDashboard({
             type="button"
             onClick={() => setTab(t.id)}
             className={`letter-wide -mb-px border-b-2 px-1 pb-3 text-xs uppercase transition-colors ${
-              tab === t.id ? "border-gold text-gold-deep" : "border-transparent text-ink/50 hover:text-ink"
+              tab === t.id ? "border-gold text-gold-deep" : "border-transparent text-ink/70 hover:text-ink"
             }`}
           >
             {t.label}
