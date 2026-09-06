@@ -10,13 +10,22 @@ export const couple = {
   venueName: "Siempre",
   venueAddress: "Draper, Utah",
   hashtag: "#McKennaAndColin",
+  rsvpByDisplay: "November 2, 2026", // update to your actual RSVP deadline
 };
+
+export const schedule: { time: string; label: string }[] = [
+  { time: "4:00 PM", label: "Ceremony" },
+  { time: "5:00 PM", label: "Cocktails" },
+  { time: "6:00 PM", label: "Dinner" },
+  { time: "8:00 PM", label: "Dancing" },
+  { time: "11:00 PM", label: "Send-Off" },
+];
 
 export const faqs: { question: string; answer: string }[] = [
   {
     question: "What should I wear?",
     answer:
-      "Attire is formal / black-tie optional. We'd love to see everyone in their finest — black, white, and gold accents are always welcome, though certainly not required.",
+      "Attire is formal / black-tie optional. We'd love to see everyone in their finest, and kindly ask guests to avoid wearing white.",
   },
   {
     question: "Are kids welcome?",
@@ -31,7 +40,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "By when should I RSVP?",
     answer:
-      "Please RSVP through this site as soon as you're able, and no later than eight weeks before the wedding.",
+      "Please reply through this site by November 2, 2026, so we can finalize our arrangements.",
   },
   {
     question: "Can I bring a plus-one?",

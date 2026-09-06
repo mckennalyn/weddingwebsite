@@ -1,38 +1,41 @@
 import type { Metadata } from "next";
 import { registry } from "@/content/site";
+import { GiftIcon } from "@/components/icons";
 
 export const metadata: Metadata = { title: "Registry" };
 
 export default function RegistryPage() {
   return (
-    <div className="mx-auto max-w-2xl px-6 py-16 text-center sm:py-24">
-      <h1 className="font-display text-4xl italic text-ink sm:text-5xl">
-        Registry
-      </h1>
-      <div className="mx-auto my-8 h-px w-16 bg-gold-soft" aria-hidden />
-      <p className="text-ink/70">
-        Your presence is the greatest gift of all. For those who&apos;ve
-        asked, we&apos;ve put together a few registries below.
-      </p>
+    <div className="pb-8">
+      <div className="mt-3 flex flex-col items-center bg-ink px-6 py-19 text-center">
+        <GiftIcon className="text-paper" />
+        <h1 className="mt-5 font-display text-5xl italic font-normal text-paper">
+          Registry
+        </h1>
+        <p className="mt-4 max-w-md leading-relaxed text-paper/80">
+          Your presence is truly the greatest gift. If you&apos;d like to give
+          something more, we&apos;ve put together a few registries below.
+        </p>
+      </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-7 px-6 pt-17 pb-8 sm:grid-cols-2">
         {registry.map((item) => (
           <a
             key={item.name}
             href={item.url}
             target="_blank"
             rel="noreferrer"
-            className="group border border-line p-8 transition-colors hover:border-gold"
+            className="border border-line p-10 text-center transition-colors hover:border-ink"
           >
-            <p className="font-display text-2xl text-ink group-hover:text-gold-deep">
-              {item.name}
-            </p>
+            <p className="font-display text-2xl text-ink">{item.name}</p>
             {item.description && (
-              <p className="mt-2 text-sm text-ink/60">{item.description}</p>
+              <p className="letter-wide mt-2 mb-5 text-[10px] uppercase text-ink/50">
+                {item.description}
+              </p>
             )}
-            <p className="letter-wide mt-4 text-xs uppercase text-gold-deep">
+            <span className="letter-wide text-xs uppercase text-ink">
               Visit &rarr;
-            </p>
+            </span>
           </a>
         ))}
       </div>

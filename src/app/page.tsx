@@ -1,41 +1,77 @@
 import Link from "next/link";
+import Image from "next/image";
 import { couple } from "@/content/site";
+import { getPhotos } from "@/actions/photos";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/faq", label: "FAQs" },
+  { href: "/rsvp", label: "RSVP" },
+  { href: "/photos", label: "Photos" },
+  { href: "/registry", label: "Registry" },
+];
+
+export default async function HomePage() {
+  let heroSrc = "/hero-placeholder.jpg";
+  try {
+    const photos = await getPhotos();
+    if (photos[0]) heroSrc = photos[0].url;
+  } catch {
+    // Database isn't connected yet — fall back to the bundled placeholder.
+  }
+
   return (
-    <div>
-      <section className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-20 pb-16 text-center sm:pt-28">
-        <p className="letter-wide text-xs uppercase text-gold-deep">
-          We&apos;re getting married
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink">
+      <Image
+        src={heroSrc}
+        alt=""
+        fill
+        priority
+        className="object-cover object-[center_30%] grayscale contrast-[1.08]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/75" />
+
+      <nav className="relative z-10 flex flex-wrap items-center justify-center gap-8 pt-11 sm:gap-13">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`letter-wide text-xs uppercase transition-colors ${
+              link.href === "/"
+                ? "border-b border-paper pb-1 text-paper"
+                : "text-paper/55 hover:text-paper"
+            }`}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-end px-6 pb-16 text-center sm:pb-[70px]">
+        <p className="letter-wide text-xs uppercase text-paper/65">
+          The Wedding Of
         </p>
-
-        <h1 className="mt-6 font-script text-6xl leading-none text-ink sm:text-7xl">
-          {couple.partnerOneFirstName}
-          <span className="mx-3 font-display italic text-gold">&amp;</span>
-          {couple.partnerTwoFirstName}
+        <h1 className="mt-5 font-display text-6xl leading-[0.92] font-normal text-paper italic sm:text-8xl">
+          <div>{couple.partnerOneFirstName}</div>
+          <div className="my-4 text-2xl text-paper/75 sm:text-4xl">&amp;</div>
+          <div>{couple.partnerTwoFirstName}</div>
         </h1>
-
-        <div className="my-8 h-px w-24 bg-gold-soft" aria-hidden />
-
-        <p className="font-display text-2xl text-ink sm:text-3xl">
+        <div className="my-8 h-px w-15 bg-paper/40" aria-hidden />
+        <p className="font-display text-xl text-paper sm:text-2xl">
           {couple.weddingDateDisplay}
         </p>
-        <p className="mt-2 text-ink/70">
-          {couple.ceremonyTime} &middot; {couple.venueName}
+        <p className="letter-wide mt-2 mb-10 text-xs uppercase text-paper/75">
+          {couple.venueName} &middot; {couple.venueAddress}
         </p>
-        <p className="text-ink/70">{couple.venueAddress}</p>
-
         <Link
           href="/rsvp"
-          className="letter-wide mt-10 inline-block border border-gold px-8 py-3 text-xs uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper"
+          className="letter-wide bg-paper px-13 py-4.5 text-xs uppercase text-ink"
         >
           RSVP
         </Link>
-
-        <p className="letter-wide mt-14 text-xs uppercase text-ink/40">
-          {couple.hashtag}
-        </p>
-      </section>
+      </div>
     </div>
   );
 }

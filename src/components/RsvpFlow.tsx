@@ -93,7 +93,7 @@ export function RsvpFlow() {
   if (status === "success" && selected) {
     return (
       <div className="text-center">
-        <p className="font-display text-3xl italic text-gold-deep">
+        <p className="font-display text-3xl italic text-ink">
           Thank you!
         </p>
         <p className="mt-4 text-ink/70">
@@ -101,7 +101,7 @@ export function RsvpFlow() {
         </p>
         <button
           type="button"
-          className="letter-wide mt-8 text-xs uppercase text-ink/60 underline hover:text-gold-deep"
+          className="letter-wide mt-8 text-xs uppercase text-ink/60 underline hover:text-ink"
           onClick={() => {
             setSelected(null);
             setResponses({});
@@ -138,8 +138,8 @@ export function RsvpFlow() {
                   }
                   className={`letter-wide border px-4 py-2 text-xs uppercase transition-colors ${
                     responses[guest.id] === true
-                      ? "border-gold bg-gold text-paper"
-                      : "border-line text-ink/70 hover:border-gold"
+                      ? "border-ink bg-ink text-paper"
+                      : "border-line text-ink/70 hover:border-ink"
                   }`}
                 >
                   Joyfully Accepts
@@ -151,7 +151,7 @@ export function RsvpFlow() {
                   }
                   className={`letter-wide border px-4 py-2 text-xs uppercase transition-colors ${
                     responses[guest.id] === false
-                      ? "border-ink bg-ink text-paper"
+                      ? "border-2 border-ink text-ink"
                       : "border-line text-ink/70 hover:border-ink"
                   }`}
                 >
@@ -173,7 +173,7 @@ export function RsvpFlow() {
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="letter-wide border border-gold px-8 py-3 text-xs uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper disabled:opacity-50"
+            className="letter-wide border border-ink bg-ink px-8 py-3 text-xs uppercase text-paper transition-opacity hover:opacity-85 disabled:opacity-50"
           >
             {isSubmitting ? "Saving..." : "Submit RSVP"}
           </button>
@@ -199,7 +199,7 @@ export function RsvpFlow() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter your first or last name"
-        className="mt-4 w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-2xl text-ink outline-none focus:border-gold"
+        className="mt-4 w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-2xl text-ink outline-none focus:border-ink"
         autoComplete="off"
       />
 
@@ -227,7 +227,7 @@ export function RsvpFlow() {
             key={household.householdId}
             type="button"
             onClick={() => chooseHousehold(household)}
-            className="border border-line px-6 py-4 text-left transition-colors hover:border-gold"
+            className="border border-line px-6 py-4 text-left transition-colors hover:border-ink"
           >
             <p className="text-ink">
               {household.guests.map(fullName).join(", ")}
