@@ -26,9 +26,8 @@ export const faqs: { question: string; answer: string }[] = [
     answer: "Attire is formal dress.",
   },
   {
-    question: "Will any of it be outside?",
-    answer:
-      "No, the ceremony and all events will be indoors — it'll be too cold in January!",
+    question: "Will the wedding be indoors or outdoors?",
+    answer: "All wedding events will take place indoors.",
   },
   {
     question: "Can I bring my children? / Can I bring a plus-one?",
