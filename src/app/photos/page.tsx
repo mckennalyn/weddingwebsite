@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getPhotos } from "@/actions/photos";
 import { couple } from "@/content/site";
-import { WavyFrame } from "@/components/WavyFrame";
+import { PolaroidFrame } from "@/components/PolaroidFrame";
 
 export const metadata: Metadata = { title: "Photos" };
 export const dynamic = "force-dynamic";
 
-function PlaceholderTile({ index }: { index: number }) {
+function PlaceholderTile() {
   const initials = `${couple.partnerOneFirstName[0]}${couple.partnerTwoFirstName[0]}`;
   return (
-    <div className="relative flex aspect-4/5 items-center justify-center bg-paper-alt">
-      <p className="font-script text-4xl font-normal text-ink/40">{initials}</p>
-      <WavyFrame className="text-ink" seed={index + 1} />
-    </div>
+    <PolaroidFrame>
+      <div className="flex h-full w-full items-center justify-center bg-ink/5">
+        <p className="font-script text-2xl font-normal text-ink/40">{initials}</p>
+      </div>
+    </PolaroidFrame>
   );
 }
 
@@ -34,14 +35,14 @@ export default async function PhotosPage() {
       {photos.length === 0 ? (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <PlaceholderTile key={i} index={i} />
+            <PlaceholderTile key={i} />
           ))}
         </div>
       ) : (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
-          {photos.map((photo, i) => (
-            <figure key={photo.id} className="relative aspect-4/5">
-              <div className="absolute inset-2.5 overflow-hidden">
+          {photos.map((photo) => (
+            <figure key={photo.id}>
+              <PolaroidFrame>
                 <Image
                   src={photo.url}
                   alt={photo.caption ?? ""}
@@ -49,8 +50,7 @@ export default async function PhotosPage() {
                   className="object-cover grayscale contrast-125"
                   sizes="(min-width: 640px) 33vw, 50vw"
                 />
-              </div>
-              <WavyFrame className="text-ink" seed={i + 1} />
+              </PolaroidFrame>
             </figure>
           ))}
         </div>
