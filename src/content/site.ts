@@ -14,7 +14,6 @@ export const couple = {
 };
 
 export const schedule: { time: string; label: string }[] = [
-  { time: "3:45 PM", label: "Guests Arrive" },
   { time: "4:00 PM", label: "Ceremony" },
   { time: "4:20 PM", label: "Cocktail Hour" },
   { time: "5:00 PM", label: "Dinner" },

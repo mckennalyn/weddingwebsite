@@ -49,15 +49,6 @@ export function DinnerIcon({ className }: IconProps) {
   );
 }
 
-export function ArriveIcon({ className }: IconProps) {
-  return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="1.3" className={className}>
-      <path d="M9 4h12v22H9" />
-      <path d="M14 15h9M19 11l4 4-4 4" />
-    </svg>
-  );
-}
-
 export function SendOffIcon({ className }: IconProps) {
   return (
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="1.3" className={className}>
@@ -80,7 +71,6 @@ export function GiftIcon({ className }: IconProps) {
 }
 
 export const scheduleIcons = {
-  "Guests Arrive": ArriveIcon,
   Ceremony: CeremonyIcon,
   "Cocktail Hour": CocktailIcon,
   Dinner: DinnerIcon,

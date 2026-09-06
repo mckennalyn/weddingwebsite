@@ -13,14 +13,10 @@ export default function RegistryPage() {
           Registry
         </h1>
         <p className="mt-4 max-w-md leading-relaxed text-paper/80">
-          Your presence at our wedding is truly the greatest gift, and we are
-          especially grateful to those traveling to celebrate with us. Please
-          know that we do not expect a gift in addition to your time and
-          effort to be here.
-        </p>
-        <p className="mt-4 max-w-md leading-relaxed text-paper/80">
-          For those who would like to give, we have put together registries
-          for our honeymoon and future home.
+          Your presence is truly the greatest gift, and we are especially
+          grateful to those traveling to celebrate with us. For those who
+          wish to give beyond their presence, we have put together
+          registries for our honeymoon and future home.
         </p>
       </div>
 

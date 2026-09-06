@@ -19,7 +19,7 @@ export default function FaqPage() {
         <p className="letter-wide text-center text-xs font-medium uppercase text-ink/70">
           The Day&apos;s Timeline
         </p>
-        <div className="mt-9 grid grid-cols-3 gap-5 sm:grid-cols-5">
+        <div className="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4">
           {schedule.map((item) => {
             const Icon = scheduleIcons[item.label as keyof typeof scheduleIcons];
             return (
