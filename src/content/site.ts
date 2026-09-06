@@ -23,7 +23,7 @@ export const schedule: { time: string; label: string }[] = [
 export const faqs: { question: string; answer: string }[] = [
   {
     question: "What should I wear?",
-    answer: "We ask that you wear formal dress.",
+    answer: "Attire is formal dress.",
   },
   {
     question: "Will the wedding be indoors or outdoors?",
