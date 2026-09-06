@@ -23,27 +23,20 @@ export const schedule: { time: string; label: string }[] = [
 export const faqs: { question: string; answer: string }[] = [
   {
     question: "What should I wear?",
-    answer:
-      "Attire is formal / black-tie optional. We'd love to see everyone in their finest, and kindly ask guests to avoid wearing white.",
+    answer: "Attire is formal dress.",
   },
   {
-    question: "Are kids welcome?",
+    question: "Can I bring my children? / Can I bring a plus-one?",
     answer:
-      "We love your little ones, but our celebration will be an adults-only affair, with the exception of the wedding party.",
+      "We kindly ask that you only bring guests included on your invitation. Your RSVP page will reflect everyone invited in your party.",
   },
   {
     question: "Is there parking at the venue?",
-    answer:
-      "Yes, complimentary on-site parking will be available. Details will be included on your invitation and in the days leading up to the wedding.",
+    answer: "Yes, on-site parking will be available at the venue.",
   },
   {
     question: "By when should I RSVP?",
     answer: `Please reply through this site by ${couple.rsvpByDisplay}, so we can finalize our arrangements.`,
-  },
-  {
-    question: "Can I bring a plus-one?",
-    answer:
-      "We're only able to accommodate the guests named on your invitation. Please check the RSVP page to see who in your party has been invited.",
   },
 ];
 
