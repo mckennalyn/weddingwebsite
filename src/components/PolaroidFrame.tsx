@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 // A subtle per-photo tilt, cycling through a fixed set so the grid
 // reads as loosely scattered rather than perfectly aligned — kept
 // small so it stays believable rather than looking thrown down.
-const TILTS = [-1.2, 0.8, -0.6, 1.4, -1.4, 0.6];
+const TILTS = [-0.7, 0.5, -0.35, 0.8, -0.8, 0.35];
 
 // A photorealistic polaroid mount: white card stock, thick margin
 // (deeper at the bottom), a soft grounded shadow, a faint sheen
