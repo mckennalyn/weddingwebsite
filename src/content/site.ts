@@ -57,6 +57,6 @@ export const registry: {
   {
     name: "Zola",
     description: "Honeymoon fund",
-    url: "https://www.zola.com/registry/example",
+    url: "https://www.zola.com/registry/thepettrys",
   },
 ];
