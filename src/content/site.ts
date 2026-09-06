@@ -56,7 +56,7 @@ export const registry: {
   {
     name: "Amazon",
     description: "Our home registry",
-    url: "https://www.amazon.com/wedding/share/example",
+    url: "https://www.amazon.com/wedding/guest-view/T0TDYE1SGHZ2",
   },
   {
     name: "Zola",

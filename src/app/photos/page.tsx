@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getPhotos } from "@/actions/photos";
-import { couple } from "@/content/site";
 import { PolaroidFrame } from "@/components/PolaroidFrame";
 
 export const metadata: Metadata = { title: "Photos" };
 export const dynamic = "force-dynamic";
 
+const PLACEHOLDER_COUNT = 6;
+
 function PlaceholderTile({ index }: { index: number }) {
-  const initials = `${couple.partnerOneFirstName[0]}${couple.partnerTwoFirstName[0]}`;
   return (
     <PolaroidFrame tiltIndex={index}>
-      <div className="flex h-full w-full items-center justify-center bg-ink/5">
-        <p className="font-script text-2xl font-normal text-ink/40">{initials}</p>
-      </div>
+      <Image
+        src={`/photo-placeholder-${index + 1}.jpg`}
+        alt=""
+        fill
+        className="object-cover grayscale contrast-125"
+        sizes="(min-width: 640px) 33vw, 50vw"
+      />
     </PolaroidFrame>
   );
 }
@@ -34,7 +38,7 @@ export default async function PhotosPage() {
 
       {photos.length === 0 ? (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: PLACEHOLDER_COUNT }).map((_, i) => (
             <PlaceholderTile key={i} index={i} />
           ))}
         </div>
