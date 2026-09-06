@@ -1,12 +1,13 @@
 type IconProps = { className?: string };
 
-export function DoveIcon({ className }: IconProps) {
+export function HeartIcon({ className }: IconProps) {
   return (
-    <svg width="46" height="30" viewBox="0 0 46 30" fill="none" className={className}>
+    <svg width="26" height="24" viewBox="0 0 26 24" fill="none" className={className}>
       <path
-        d="M23 26 C 18 14, 4 14, 2 4 C 10 8, 18 10, 23 18 C 28 10, 36 8, 44 4 C 42 14, 28 14, 23 26 Z"
+        d="M13 22 C 13 22 2 14.5 2 7.5 C 2 3.5 5 1 8.2 1 C 10.5 1 12.2 2.3 13 4.2 C 13.8 2.3 15.5 1 17.8 1 C 21 1 24 3.5 24 7.5 C 24 14.5 13 22 13 22 Z"
         stroke="currentColor"
-        strokeWidth="1"
+        strokeWidth="1.3"
+        strokeLinejoin="round"
       />
     </svg>
   );

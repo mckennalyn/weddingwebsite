@@ -10,7 +10,7 @@ export const couple = {
   venueName: "Siempre",
   venueAddress: "Draper, Utah",
   hashtag: "#McKennaAndColin",
-  rsvpByDisplay: "November 2, 2026", // update to your actual RSVP deadline
+  rsvpByDisplay: "December 5, 2026", // update to your actual RSVP deadline
 };
 
 export const schedule: { time: string; label: string }[] = [
@@ -39,8 +39,7 @@ export const faqs: { question: string; answer: string }[] = [
   },
   {
     question: "By when should I RSVP?",
-    answer:
-      "Please reply through this site by November 2, 2026, so we can finalize our arrangements.",
+    answer: `Please reply through this site by ${couple.rsvpByDisplay}, so we can finalize our arrangements.`,
   },
   {
     question: "Can I bring a plus-one?",
@@ -61,7 +60,7 @@ export const registry: {
   },
   {
     name: "Zola",
-    description: "Experiences & honeymoon fund",
+    description: "Honeymoon fund",
     url: "https://www.zola.com/registry/example",
   },
 ];

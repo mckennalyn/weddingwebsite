@@ -49,7 +49,7 @@ export default async function HomePage() {
         ))}
       </nav>
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-end px-6 pb-16 text-center sm:pb-[70px]">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-6 text-center">
         <p className="letter-wide text-xs uppercase text-paper/65">
           The Wedding Of
         </p>

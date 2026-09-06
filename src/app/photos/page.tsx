@@ -32,16 +32,10 @@ export default async function PhotosPage() {
       </h1>
 
       {photos.length === 0 ? (
-        <div>
-          <p className="mt-8 text-center text-sm text-ink/50">
-            Our engagement photos are on their way &mdash; here&apos;s a
-            placeholder for now.
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <PlaceholderTile key={i} index={i} />
-            ))}
-          </div>
+        <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <PlaceholderTile key={i} index={i} />
+          ))}
         </div>
       ) : (
         <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
