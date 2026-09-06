@@ -14,7 +14,8 @@ export default function RegistryPage() {
         </h1>
         <p className="mt-4 max-w-md leading-relaxed text-paper/80">
           Your presence is truly the greatest gift. If you&apos;d like to give
-          something more, we&apos;ve put together a few registries below.
+          something more, we&apos;ve put together registries for our
+          honeymoon and future home.
         </p>
       </div>
 
