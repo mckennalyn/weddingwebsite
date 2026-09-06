@@ -38,10 +38,10 @@ export default async function HomePage() {
           <Link
             key={link.href}
             href={link.href}
-            className={`letter-wide text-xs uppercase transition-colors ${
+            className={`letter-wide text-xs font-medium uppercase transition-colors ${
               link.href === "/"
                 ? "border-b border-paper pb-1 text-paper"
-                : "text-paper/55 hover:text-paper"
+                : "text-paper/70 hover:text-paper"
             }`}
           >
             {link.label}
@@ -55,7 +55,7 @@ export default async function HomePage() {
         </p>
         <h1 className="mt-5 font-display text-6xl leading-[0.92] font-normal text-paper italic sm:text-8xl">
           <div>{couple.partnerOneFirstName}</div>
-          <div className="my-4 text-2xl text-paper/75 sm:text-4xl">&amp;</div>
+          <div className="my-4 text-2xl font-medium text-paper/90 sm:text-4xl">&amp;</div>
           <div>{couple.partnerTwoFirstName}</div>
         </h1>
         <div className="my-8 h-px w-15 bg-paper/40" aria-hidden />

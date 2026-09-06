@@ -27,10 +27,10 @@ export function Nav() {
           <Link
             key={link.href}
             href={link.href}
-            className={`letter-wide text-xs uppercase transition-colors ${
+            className={`letter-wide text-xs font-medium uppercase transition-colors ${
               active
                 ? "border-b border-ink pb-1 text-ink"
-                : "text-ink/55 hover:text-ink"
+                : "text-ink/70 hover:text-ink"
             }`}
           >
             {link.label}
