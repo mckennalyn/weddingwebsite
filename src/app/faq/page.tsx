@@ -43,7 +43,7 @@ export default function FaqPage() {
             src="/faq-details.jpg"
             alt=""
             fill
-            className="object-cover grayscale contrast-125"
+            className="object-cover"
           />
         </PolaroidFrame>
 

@@ -9,13 +9,16 @@ export const dynamic = "force-dynamic";
 const PLACEHOLDER_COUNT = 6;
 
 function PlaceholderTile({ index }: { index: number }) {
+  // Tile 0 is a real engagement photo shown in color; the rest are
+  // generic stock placeholders kept in the site's grayscale look.
+  const isRealPhoto = index === 0;
   return (
     <PolaroidFrame tiltIndex={index}>
       <Image
         src={`/photo-placeholder-${index + 1}.jpg`}
         alt=""
         fill
-        className="object-cover grayscale contrast-125"
+        className={`object-cover ${isRealPhoto ? "" : "grayscale contrast-125"}`}
         sizes="(min-width: 640px) 33vw, 50vw"
       />
     </PolaroidFrame>

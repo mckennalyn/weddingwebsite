@@ -29,7 +29,7 @@ export default async function HomePage() {
         alt=""
         fill
         priority
-        className="object-cover object-[center_30%] grayscale contrast-[1.08]"
+        className="object-cover object-[center_8%]"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/75" />
 
