@@ -14,11 +14,11 @@ export const couple = {
 };
 
 export const schedule: { time: string; label: string }[] = [
+  { time: "3:45 PM", label: "Guests Arrive" },
   { time: "4:00 PM", label: "Ceremony" },
-  { time: "5:00 PM", label: "Cocktails" },
-  { time: "6:00 PM", label: "Dinner" },
-  { time: "8:00 PM", label: "Dancing" },
-  { time: "11:00 PM", label: "Send-Off" },
+  { time: "4:20 PM", label: "Cocktail Hour" },
+  { time: "5:00 PM", label: "Dinner" },
+  { time: "7:00 PM", label: "Send-Off" },
 ];
 
 export const faqs: { question: string; answer: string }[] = [

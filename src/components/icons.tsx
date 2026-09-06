@@ -49,12 +49,11 @@ export function DinnerIcon({ className }: IconProps) {
   );
 }
 
-export function DancingIcon({ className }: IconProps) {
+export function ArriveIcon({ className }: IconProps) {
   return (
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="1.3" className={className}>
-      <circle cx="9" cy="23" r="4" />
-      <path d="M13 23V6l12-3v14" />
-      <circle cx="21" cy="20" r="4" />
+      <path d="M9 4h12v22H9" />
+      <path d="M14 15h9M19 11l4 4-4 4" />
     </svg>
   );
 }
@@ -81,9 +80,9 @@ export function GiftIcon({ className }: IconProps) {
 }
 
 export const scheduleIcons = {
+  "Guests Arrive": ArriveIcon,
   Ceremony: CeremonyIcon,
-  Cocktails: CocktailIcon,
+  "Cocktail Hour": CocktailIcon,
   Dinner: DinnerIcon,
-  Dancing: DancingIcon,
   "Send-Off": SendOffIcon,
 } as const;
