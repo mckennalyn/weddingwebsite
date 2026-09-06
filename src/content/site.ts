@@ -26,6 +26,11 @@ export const faqs: { question: string; answer: string }[] = [
     answer: "Attire is formal dress.",
   },
   {
+    question: "Will any of it be outside?",
+    answer:
+      "No, the ceremony and all events will be indoors — it'll be too cold in January!",
+  },
+  {
     question: "Can I bring my children? / Can I bring a plus-one?",
     answer:
       "We kindly ask that you only bring guests included on your invitation. Your RSVP page will reflect everyone invited in your party.",
