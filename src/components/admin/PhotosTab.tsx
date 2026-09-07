@@ -48,7 +48,7 @@ export function PhotosTab({ photos }: { photos: Photo[] }) {
         />
         <label
           htmlFor="photo-upload"
-          className="letter-wide cursor-pointer border border-gold px-8 py-3 text-sm uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper"
+          className="letter-wide cursor-pointer border border-ink px-8 py-3 text-sm uppercase text-ink transition-colors hover:bg-ink hover:text-paper"
         >
           {uploading ? "Uploading..." : "Choose photos"}
         </label>

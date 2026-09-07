@@ -17,7 +17,7 @@ export function AdminLogin() {
           name="password"
           placeholder="Password"
           autoFocus
-          className="w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-xl text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-xl text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         {state?.error && (
           <p className="mt-3 text-base text-red-700">{state.error}</p>
@@ -25,7 +25,7 @@ export function AdminLogin() {
         <button
           type="submit"
           disabled={pending}
-          className="letter-wide mt-6 w-full border border-gold px-8 py-3 text-sm uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper disabled:opacity-50"
+          className="letter-wide mt-6 w-full border border-ink px-8 py-3 text-sm uppercase text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-50"
         >
           {pending ? "Checking..." : "Enter"}
         </button>

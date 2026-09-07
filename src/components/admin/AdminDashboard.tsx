@@ -5,10 +5,11 @@ import { logoutAdmin } from "@/actions/admin-auth";
 import type { HouseholdWithGuests } from "@/actions/guests-admin";
 import type { Photo } from "@/lib/db";
 import { GuestsTab } from "./GuestsTab";
+import { GuestStatusTab } from "./GuestStatusTab";
 import { AddHouseholdForm } from "./AddHouseholdForm";
 import { PhotosTab } from "./PhotosTab";
 
-type Tab = "guests" | "add" | "photos";
+type Tab = "guests" | "status" | "add" | "photos";
 
 export function AdminDashboard({
   households,
@@ -21,6 +22,7 @@ export function AdminDashboard({
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "guests", label: "Guest List" },
+    { id: "status", label: "By Status" },
     { id: "add", label: "Add Household" },
     { id: "photos", label: "Photos" },
   ];
@@ -46,7 +48,7 @@ export function AdminDashboard({
             type="button"
             onClick={() => setTab(t.id)}
             className={`letter-wide -mb-px border-b-2 px-1 pb-3 text-sm uppercase transition-colors ${
-              tab === t.id ? "border-gold text-gold-deep" : "border-transparent text-ink hover:text-ink"
+              tab === t.id ? "border-ink text-ink" : "border-transparent text-ink/70 hover:text-ink"
             }`}
           >
             {t.label}
@@ -56,6 +58,7 @@ export function AdminDashboard({
 
       <div className="mt-10">
         {tab === "guests" && <GuestsTab households={households} />}
+        {tab === "status" && <GuestStatusTab households={households} />}
         {tab === "add" && <AddHouseholdForm />}
         {tab === "photos" && <PhotosTab photos={photos} />}
       </div>

@@ -60,7 +60,7 @@ export function AddHouseholdForm() {
           name="label"
           placeholder="The Smith Family"
           required
-          className="mt-2 w-full border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="mt-2 w-full border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
       </div>
 
@@ -68,32 +68,32 @@ export function AddHouseholdForm() {
         <input
           name="addressLine1"
           placeholder="Address line 1"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         <input
           name="addressLine2"
           placeholder="Address line 2"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         <input
           name="city"
           placeholder="City"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         <input
           name="state"
           placeholder="State"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         <input
           name="postalCode"
           placeholder="Postal code"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
         <input
           name="country"
           placeholder="Country"
-          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+          className="border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
         />
       </div>
 
@@ -108,7 +108,7 @@ export function AddHouseholdForm() {
                 onChange={(e) => updateRow(i, "firstName", e.target.value)}
                 placeholder="First name"
                 required
-                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
               />
               <input
                 name="guestLastName"
@@ -116,7 +116,7 @@ export function AddHouseholdForm() {
                 onChange={(e) => updateRow(i, "lastName", e.target.value)}
                 placeholder="Last name"
                 required
-                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+                className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
               />
               {guestRows.length > 1 && (
                 <button
@@ -134,7 +134,7 @@ export function AddHouseholdForm() {
         <button
           type="button"
           onClick={addRow}
-          className="letter-wide mt-3 text-sm uppercase text-gold-deep hover:underline"
+          className="letter-wide mt-3 text-sm uppercase text-ink hover:underline"
         >
           + Add another guest
         </button>
@@ -142,13 +142,13 @@ export function AddHouseholdForm() {
 
       {error && <p className="text-base text-red-700">{error}</p>}
       {success && (
-        <p className="text-base text-gold-deep">Household added.</p>
+        <p className="text-base text-ink">Household added.</p>
       )}
 
       <button
         type="submit"
         disabled={isPending}
-        className="letter-wide border border-gold px-8 py-3 text-sm uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper disabled:opacity-50"
+        className="letter-wide border border-ink px-8 py-3 text-sm uppercase text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-50"
       >
         {isPending ? "Saving..." : "Add household"}
       </button>
