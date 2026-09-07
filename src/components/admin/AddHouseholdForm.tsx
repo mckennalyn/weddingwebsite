@@ -53,7 +53,7 @@ export function AddHouseholdForm() {
       className="mx-auto max-w-lg space-y-6"
     >
       <div>
-        <label className="letter-wide block text-xs uppercase text-ink">
+        <label className="letter-wide block text-sm uppercase text-ink">
           Household label
         </label>
         <input
@@ -98,7 +98,7 @@ export function AddHouseholdForm() {
       </div>
 
       <div>
-        <p className="letter-wide text-xs uppercase text-ink">Guests</p>
+        <p className="letter-wide text-sm uppercase text-ink">Guests</p>
         <div className="mt-3 space-y-3">
           {guestRows.map((row, i) => (
             <div key={i} className="flex gap-3">
@@ -134,21 +134,21 @@ export function AddHouseholdForm() {
         <button
           type="button"
           onClick={addRow}
-          className="letter-wide mt-3 text-xs uppercase text-gold-deep hover:underline"
+          className="letter-wide mt-3 text-sm uppercase text-gold-deep hover:underline"
         >
           + Add another guest
         </button>
       </div>
 
-      {error && <p className="text-sm text-red-700">{error}</p>}
+      {error && <p className="text-base text-red-700">{error}</p>}
       {success && (
-        <p className="text-sm text-gold-deep">Household added.</p>
+        <p className="text-base text-gold-deep">Household added.</p>
       )}
 
       <button
         type="submit"
         disabled={isPending}
-        className="letter-wide border border-gold px-8 py-3 text-xs uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper disabled:opacity-50"
+        className="letter-wide border border-gold px-8 py-3 text-sm uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper disabled:opacity-50"
       >
         {isPending ? "Saving..." : "Add household"}
       </button>

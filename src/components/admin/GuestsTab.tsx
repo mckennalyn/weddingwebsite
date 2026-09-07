@@ -28,7 +28,7 @@ function YesNoButtons({
       <button
         type="button"
         onClick={() => onSet(status === "attending" ? "pending" : "attending")}
-        className={`letter-wide rounded-full border px-3 py-1 text-[10px] uppercase transition-colors ${
+        className={`letter-wide rounded-full border px-3 py-1 text-xs uppercase transition-colors ${
           status === "attending"
             ? "border-gold bg-gold text-paper"
             : "border-line text-ink hover:border-gold hover:text-gold-deep"
@@ -39,7 +39,7 @@ function YesNoButtons({
       <button
         type="button"
         onClick={() => onSet(status === "declined" ? "pending" : "declined")}
-        className={`letter-wide rounded-full border px-3 py-1 text-[10px] uppercase transition-colors ${
+        className={`letter-wide rounded-full border px-3 py-1 text-xs uppercase transition-colors ${
           status === "declined"
             ? "border-ink/60 bg-ink/60 text-paper"
             : "border-line text-ink hover:border-ink hover:text-ink"
@@ -64,15 +64,15 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
         <div>
           <p className="font-display text-xl text-ink">{household.label}</p>
           {!editing && (
-            <p className="mt-1 text-sm text-ink">
+            <p className="mt-1 text-base text-ink">
               {addressLines(household).join(" · ") || "No address on file"}
             </p>
           )}
-          <p className="letter-wide mt-1 text-[10px] uppercase text-ink">
+          <p className="letter-wide mt-1 text-xs uppercase text-ink">
             {responded}/{household.guests.length} responded
           </p>
         </div>
-        <div className="flex gap-4 text-xs">
+        <div className="flex gap-4 text-sm">
           <button
             type="button"
             onClick={() => setEditing((v) => !v)}
@@ -102,14 +102,14 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
           }}
           className="mt-4 grid grid-cols-2 gap-3"
         >
-          <input name="label" defaultValue={household.label} placeholder="Label" className="col-span-2 border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="addressLine1" defaultValue={household.address_line1 ?? ""} placeholder="Address line 1" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="addressLine2" defaultValue={household.address_line2 ?? ""} placeholder="Address line 2" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="city" defaultValue={household.city ?? ""} placeholder="City" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="state" defaultValue={household.state ?? ""} placeholder="State" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="postalCode" defaultValue={household.postal_code ?? ""} placeholder="Postal code" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="country" defaultValue={household.country ?? ""} placeholder="Country" className="border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <button type="submit" className="letter-wide col-span-2 border border-gold py-2 text-xs uppercase text-gold-deep hover:bg-gold hover:text-paper">
+          <input name="label" defaultValue={household.label} placeholder="Label" className="col-span-2 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="addressLine1" defaultValue={household.address_line1 ?? ""} placeholder="Address line 1" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="addressLine2" defaultValue={household.address_line2 ?? ""} placeholder="Address line 2" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="city" defaultValue={household.city ?? ""} placeholder="City" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="state" defaultValue={household.state ?? ""} placeholder="State" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="postalCode" defaultValue={household.postal_code ?? ""} placeholder="Postal code" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="country" defaultValue={household.country ?? ""} placeholder="Country" className="border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <button type="submit" className="letter-wide col-span-2 border border-gold py-2 text-sm uppercase text-gold-deep hover:bg-gold hover:text-paper">
             Save address
           </button>
         </form>
@@ -123,7 +123,7 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
                 {guest.first_name} {guest.last_name}
               </p>
               {guest.rsvp_status === "pending" && (
-                <p className="letter-wide text-[10px] uppercase text-ink">
+                <p className="letter-wide text-xs uppercase text-ink">
                   Awaiting response
                 </p>
               )}
@@ -154,9 +154,9 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
           }}
           className="mt-3 flex gap-2"
         >
-          <input name="firstName" placeholder="First name" required className="flex-1 border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <input name="lastName" placeholder="Last name" required className="flex-1 border border-line px-3 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
-          <button type="submit" className="letter-wide border border-gold px-3 text-xs uppercase text-gold-deep hover:bg-gold hover:text-paper">
+          <input name="firstName" placeholder="First name" required className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <input name="lastName" placeholder="Last name" required className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold" />
+          <button type="submit" className="letter-wide border border-gold px-3 text-sm uppercase text-gold-deep hover:bg-gold hover:text-paper">
             Add
           </button>
         </form>
@@ -164,7 +164,7 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
         <button
           type="button"
           onClick={() => setAddingGuest(true)}
-          className="letter-wide mt-3 text-xs uppercase text-gold-deep hover:underline"
+          className="letter-wide mt-3 text-sm uppercase text-gold-deep hover:underline"
         >
           + Add guest to this household
         </button>
@@ -216,7 +216,7 @@ export function GuestsTab({ households }: { households: HouseholdWithGuests[] })
         ].map(([label, value]) => (
           <div key={label as string}>
             <p className="font-display text-2xl text-ink">{value}</p>
-            <p className="letter-wide text-[10px] uppercase text-ink">{label}</p>
+            <p className="letter-wide text-xs uppercase text-ink">{label}</p>
           </div>
         ))}
       </div>
@@ -226,12 +226,12 @@ export function GuestsTab({ households }: { households: HouseholdWithGuests[] })
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search guests, households, or addresses"
-        className="mt-8 w-full border border-line px-4 py-2 text-sm text-ink outline-none placeholder:text-ink/70 focus:border-gold"
+        className="mt-8 w-full border border-line px-4 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-gold"
       />
 
       <div className="mt-6 space-y-4">
         {filtered.length === 0 ? (
-          <p className="text-center text-sm text-ink">No matches.</p>
+          <p className="text-center text-base text-ink">No matches.</p>
         ) : (
           filtered.map((h) => <HouseholdCard key={h.id} household={h} />)
         )}

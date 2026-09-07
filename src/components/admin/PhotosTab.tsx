@@ -36,7 +36,7 @@ export function PhotosTab({ photos }: { photos: Photo[] }) {
   return (
     <div>
       <div className="flex flex-col items-center gap-3 border border-dashed border-line p-10 text-center">
-        <p className="text-ink/70">Upload engagement photos</p>
+        <p className="text-ink">Upload engagement photos</p>
         <input
           ref={inputRef}
           type="file"
@@ -48,11 +48,11 @@ export function PhotosTab({ photos }: { photos: Photo[] }) {
         />
         <label
           htmlFor="photo-upload"
-          className="letter-wide cursor-pointer border border-gold px-8 py-3 text-xs uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper"
+          className="letter-wide cursor-pointer border border-gold px-8 py-3 text-sm uppercase text-gold-deep transition-colors hover:bg-gold hover:text-paper"
         >
           {uploading ? "Uploading..." : "Choose photos"}
         </label>
-        {error && <p className="text-sm text-red-700">{error}</p>}
+        {error && <p className="text-base text-red-700">{error}</p>}
       </div>
 
       <div className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-4">
@@ -62,7 +62,7 @@ export function PhotosTab({ photos }: { photos: Photo[] }) {
             <button
               type="button"
               onClick={() => startTransition(() => deletePhoto(photo.id, photo.url))}
-              className="absolute right-1 top-1 hidden h-6 w-6 items-center justify-center bg-ink/70 text-xs text-paper group-hover:flex"
+              className="absolute right-1 top-1 hidden h-6 w-6 items-center justify-center bg-ink/70 text-sm text-paper group-hover:flex"
               aria-label="Delete photo"
             >
               &times;
