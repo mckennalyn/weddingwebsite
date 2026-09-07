@@ -99,17 +99,6 @@ export function RsvpFlow() {
         <p className="mt-4 text-ink/70">
           We&apos;ve saved your response for {selected.guests.map(fullName).join(", ")}.
         </p>
-        <button
-          type="button"
-          className="letter-wide mt-8 text-xs font-medium uppercase text-ink/65 underline hover:text-ink"
-          onClick={() => {
-            setSelected(null);
-            setResponses({});
-            setStatus("idle");
-          }}
-        >
-          Submit another response
-        </button>
       </div>
     );
   }
@@ -142,7 +131,7 @@ export function RsvpFlow() {
                       : "border-line text-ink/70 hover:border-ink"
                   }`}
                 >
-                  Joyfully Accepts
+                  Accept
                 </button>
                 <button
                   type="button"
@@ -151,11 +140,11 @@ export function RsvpFlow() {
                   }
                   className={`letter-wide border px-4 py-2 text-xs uppercase transition-colors ${
                     responses[guest.id] === false
-                      ? "border-2 border-ink text-ink"
+                      ? "border-ink bg-ink text-paper"
                       : "border-line text-ink/70 hover:border-ink"
                   }`}
                 >
-                  Regretfully Declines
+                  Decline
                 </button>
               </div>
             </div>
@@ -173,14 +162,14 @@ export function RsvpFlow() {
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="letter-wide border border-ink bg-ink px-8 py-3 text-xs uppercase text-paper transition-opacity hover:opacity-85 disabled:opacity-50"
+            className="letter-wide border border-ink bg-ink px-8 py-3 text-xs uppercase text-paper transition-colors hover:bg-paper hover:text-ink disabled:opacity-50"
           >
             {isSubmitting ? "Saving..." : "Submit RSVP"}
           </button>
           <button
             type="button"
             onClick={() => setSelected(null)}
-            className="letter-wide text-xs font-medium uppercase text-ink/65 hover:text-ink"
+            className="letter-wide border border-line px-4 py-2 text-xs font-medium uppercase text-ink/70 transition-colors hover:border-ink hover:text-ink"
           >
             Not your invitation? Search again
           </button>

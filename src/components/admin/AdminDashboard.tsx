@@ -30,7 +30,10 @@ export function AdminDashboard({
       <div className="flex items-center justify-between">
         <h1 className="font-display text-3xl italic text-ink">Administration</h1>
         <form action={logoutAdmin}>
-          <button type="submit" className="letter-wide text-sm uppercase text-ink hover:text-ink">
+          <button
+            type="submit"
+            className="letter-wide border border-line px-4 py-2 text-sm uppercase text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+          >
             Log out
           </button>
         </form>
