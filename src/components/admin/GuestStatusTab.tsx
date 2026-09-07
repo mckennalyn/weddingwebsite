@@ -88,7 +88,6 @@ export function GuestStatusTab({
                 </p>
               </div>
               <YesNoButtons
-                name={`${guest.first_name} ${guest.last_name}`}
                 status={guest.rsvp_status}
                 onSet={(status: RsvpStatus) =>
                   startTransition(() => setGuestRsvpStatus(guest.id, status))

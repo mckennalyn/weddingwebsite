@@ -17,11 +17,9 @@ function addressLines(h: HouseholdWithGuests) {
 }
 
 export function YesNoButtons({
-  name,
   status,
   onSet,
 }: {
-  name: string;
   status: RsvpStatus;
   onSet: (status: RsvpStatus) => void;
 }) {
@@ -29,10 +27,7 @@ export function YesNoButtons({
     <div className="flex items-center gap-1.5">
       <button
         type="button"
-        onClick={() => {
-          const next = status === "attending" ? "pending" : "attending";
-          if (confirm(`Confirm ${name} is attending?`)) onSet(next);
-        }}
+        onClick={() => onSet(status === "attending" ? "pending" : "attending")}
         className={`letter-wide rounded-full border px-3 py-1 text-xs uppercase transition-colors ${
           status === "attending"
             ? "border-ink bg-ink text-paper"
@@ -43,10 +38,7 @@ export function YesNoButtons({
       </button>
       <button
         type="button"
-        onClick={() => {
-          const next = status === "declined" ? "pending" : "declined";
-          if (confirm(`Confirm ${name} is not attending?`)) onSet(next);
-        }}
+        onClick={() => onSet(status === "declined" ? "pending" : "declined")}
         className={`letter-wide rounded-full border px-3 py-1 text-xs uppercase transition-colors ${
           status === "declined"
             ? "border-ink bg-ink text-paper"
@@ -138,7 +130,6 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
             </div>
             <div className="flex items-center gap-2">
               <YesNoButtons
-                name={`${guest.first_name} ${guest.last_name}`}
                 status={guest.rsvp_status}
                 onSet={(status) => startTransition(() => setGuestRsvpStatus(guest.id, status))}
               />
