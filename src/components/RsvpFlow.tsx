@@ -122,9 +122,11 @@ export function RsvpFlow() {
               <div className="flex gap-3">
                 <button
                   type="button"
-                  onClick={() =>
-                    setResponses((r) => ({ ...r, [guest.id]: true }))
-                  }
+                  onClick={() => {
+                    if (confirm(`Confirm ${fullName(guest)} is attending?`)) {
+                      setResponses((r) => ({ ...r, [guest.id]: true }));
+                    }
+                  }}
                   className={`letter-wide border px-4 py-2 text-xs uppercase transition-colors ${
                     responses[guest.id] === true
                       ? "border-ink bg-ink text-paper"
@@ -135,9 +137,13 @@ export function RsvpFlow() {
                 </button>
                 <button
                   type="button"
-                  onClick={() =>
-                    setResponses((r) => ({ ...r, [guest.id]: false }))
-                  }
+                  onClick={() => {
+                    if (
+                      confirm(`Confirm ${fullName(guest)} is not attending?`)
+                    ) {
+                      setResponses((r) => ({ ...r, [guest.id]: false }));
+                    }
+                  }}
                   className={`letter-wide border px-4 py-2 text-xs uppercase transition-colors ${
                     responses[guest.id] === false
                       ? "border-ink bg-ink text-paper"
@@ -157,7 +163,7 @@ export function RsvpFlow() {
           </p>
         )}
 
-        <div className="mt-10 flex flex-col items-center gap-4">
+        <div className="mt-6 flex flex-col items-center gap-6">
           <button
             type="button"
             onClick={handleSubmit}
