@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import type { HouseholdWithGuests } from "@/actions/guests-admin";
 import { setGuestRsvpStatus } from "@/actions/guests-admin";
 import type { RsvpStatus } from "@/lib/db";
+import { guestDisplayName } from "@/lib/guest-name";
 import { YesNoButtons } from "./GuestsTab";
 
 type Filter = "all" | "pending" | "attending" | "declined";
@@ -26,7 +27,11 @@ export function GuestStatusTab({
   const rows = useMemo(() => {
     return households
       .flatMap((h) =>
-        h.guests.map((guest) => ({ guest, householdLabel: h.label }))
+        h.guests.map((guest) => ({
+          guest,
+          householdLabel: h.label,
+          name: guestDisplayName(guest, h.guests),
+        }))
       )
       .sort((a, b) => {
         const lastName = a.guest.last_name.localeCompare(b.guest.last_name);
@@ -74,14 +79,14 @@ export function GuestStatusTab({
             No guests match this filter.
           </p>
         ) : (
-          filtered.map(({ guest, householdLabel }) => (
+          filtered.map(({ guest, householdLabel, name }) => (
             <div
               key={guest.id}
               className="flex flex-wrap items-center justify-between gap-3 py-4"
             >
               <div>
                 <p className="text-ink">
-                  {guest.first_name} {guest.last_name}
+                  {name}
                 </p>
                 <p className="letter-wide text-xs uppercase text-ink/70">
                   {householdLabel}

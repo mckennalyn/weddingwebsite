@@ -10,6 +10,7 @@ import {
   updateHouseholdAddress,
 } from "@/actions/guests-admin";
 import type { RsvpStatus } from "@/lib/db";
+import { guestDisplayName } from "@/lib/guest-name";
 
 function addressLines(h: HouseholdWithGuests) {
   return [h.address_line1, h.address_line2, [h.city, h.state, h.postal_code].filter(Boolean).join(", "), h.country]
@@ -120,8 +121,11 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
           <div key={guest.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
             <div>
               <p className="text-ink">
-                {guest.first_name} {guest.last_name}
+                {guestDisplayName(guest, household.guests)}
               </p>
+              {guest.is_plus_one && (
+                <p className="letter-wide text-xs uppercase text-ink">Plus-one</p>
+              )}
               {guest.rsvp_status === "pending" && (
                 <p className="letter-wide text-xs uppercase text-ink">
                   Awaiting response
@@ -138,7 +142,7 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
                 onClick={() => {
                   if (
                     confirm(
-                      `Remove ${guest.first_name} ${guest.last_name} from this household?`
+                      `Remove ${guestDisplayName(guest, household.guests)} from this household?`
                     )
                   ) {
                     startTransition(() => deleteGuest(guest.id));
@@ -162,8 +166,11 @@ function HouseholdCard({ household }: { household: HouseholdWithGuests }) {
           }}
           className="mt-3 flex gap-2"
         >
-          <input name="firstName" placeholder="First name" required className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-ink" />
-          <input name="lastName" placeholder="Last name" required className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-ink" />
+          <input name="firstName" placeholder="First name" className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-ink" />
+          <input name="lastName" placeholder="Last name" className="flex-1 border border-line px-3 py-2 text-base text-ink outline-none placeholder:text-ink/70 focus:border-ink" />
+          <label className="flex items-center gap-1.5 whitespace-nowrap text-sm text-ink">
+            <input type="checkbox" name="isPlusOne" /> Plus-one
+          </label>
           <button type="submit" className="letter-wide border border-ink px-3 text-sm uppercase text-ink hover:bg-ink hover:text-paper">
             Add
           </button>

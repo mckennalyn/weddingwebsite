@@ -15,6 +15,9 @@ export function RsvpFlow() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<SearchResultHousehold | null>(null);
   const [responses, setResponses] = useState<Record<string, boolean>>({});
+  const [plusOneNames, setPlusOneNames] = useState<
+    Record<string, { first: string; last: string }>
+  >({});
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [lookupError, setLookupError] = useState("");
@@ -39,12 +42,17 @@ export function RsvpFlow() {
           return;
         }
         const initial: Record<string, boolean> = {};
+        const names: Record<string, { first: string; last: string }> = {};
         for (const guest of household.guests) {
           if (guest.rsvpStatus !== "pending") {
             initial[guest.id] = guest.rsvpStatus === "attending";
           }
+          if (guest.isPlusOne) {
+            names[guest.id] = { first: guest.firstName, last: guest.lastName };
+          }
         }
         setResponses(initial);
+        setPlusOneNames(names);
         setStatus("idle");
         setErrorMessage("");
         setSelected(household);
@@ -64,6 +72,17 @@ export function RsvpFlow() {
       setStatus("error");
       return;
     }
+    const missingName = selected.guests.some(
+      (g) =>
+        g.isPlusOne &&
+        responses[g.id] &&
+        (!plusOneNames[g.id]?.first.trim() || !plusOneNames[g.id]?.last.trim())
+    );
+    if (missingName) {
+      setErrorMessage("Please enter your guest's first and last name.");
+      setStatus("error");
+      return;
+    }
 
     startSubmit(async () => {
       try {
@@ -72,6 +91,12 @@ export function RsvpFlow() {
           selected.guests.map((g) => ({
             guestId: g.id,
             attending: responses[g.id],
+            ...(g.isPlusOne && responses[g.id]
+              ? {
+                  firstName: plusOneNames[g.id]?.first,
+                  lastName: plusOneNames[g.id]?.last,
+                }
+              : {}),
           }))
         );
         if (result.success) {
@@ -94,7 +119,14 @@ export function RsvpFlow() {
           Thank you!
         </p>
         <p className="mt-4 text-ink/70">
-          We&apos;ve saved your response for {selected.guests.map(fullName).join(", ")}.
+          We&apos;ve saved your response for {selected.guests
+            .filter((g) => !g.isPlusOne || responses[g.id])
+            .map((g) =>
+              g.isPlusOne
+                ? `${plusOneNames[g.id]?.first.trim()} ${plusOneNames[g.id]?.last.trim()}`
+                : fullName(g)
+            )
+            .join(", ")}.
         </p>
       </div>
     );
@@ -109,12 +141,10 @@ export function RsvpFlow() {
 
         <div className="mt-8 divide-y divide-line">
           {selected.guests.map((guest) => (
-            <div
-              key={guest.id}
-              className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between"
-            >
+            <div key={guest.id} className="py-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-display text-xl text-ink">
-                {fullName(guest)}
+                {guest.isPlusOne ? "Your guest" : fullName(guest)}
               </p>
               <div className="flex gap-3">
                 <button
@@ -144,6 +174,37 @@ export function RsvpFlow() {
                   Decline
                 </button>
               </div>
+            </div>
+            {guest.isPlusOne && responses[guest.id] === true && (
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <input
+                  type="text"
+                  value={plusOneNames[guest.id]?.first ?? ""}
+                  onChange={(e) =>
+                    setPlusOneNames((n) => ({
+                      ...n,
+                      [guest.id]: { first: e.target.value, last: n[guest.id]?.last ?? "" },
+                    }))
+                  }
+                  placeholder="Guest's first name"
+                  autoComplete="off"
+                  className="border-b border-line bg-transparent px-2 py-2 text-ink outline-none focus:border-ink"
+                />
+                <input
+                  type="text"
+                  value={plusOneNames[guest.id]?.last ?? ""}
+                  onChange={(e) =>
+                    setPlusOneNames((n) => ({
+                      ...n,
+                      [guest.id]: { first: n[guest.id]?.first ?? "", last: e.target.value },
+                    }))
+                  }
+                  placeholder="Guest's last name"
+                  autoComplete="off"
+                  className="border-b border-line bg-transparent px-2 py-2 text-ink outline-none focus:border-ink"
+                />
+              </div>
+            )}
             </div>
           ))}
         </div>

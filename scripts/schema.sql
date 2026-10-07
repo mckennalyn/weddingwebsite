@@ -31,3 +31,5 @@ create table if not exists photos (
   sort_order int not null default 0,
   created_at timestamptz not null default now()
 );
+
+alter table guests add column if not exists is_plus_one boolean not null default false;

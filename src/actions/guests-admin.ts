@@ -108,13 +108,15 @@ export async function addGuestToHousehold(
 
   const firstName = String(formData.get("firstName") ?? "").trim();
   const lastName = String(formData.get("lastName") ?? "").trim();
-  if (!firstName || !lastName) {
+  const isPlusOne = formData.get("isPlusOne") === "on";
+  // A plus-one's name is optional: the guest fills it in when they RSVP.
+  if (!isPlusOne && (!firstName || !lastName)) {
     throw new Error("Guest needs a first and last name.");
   }
 
   await sql`
-    insert into guests (household_id, first_name, last_name)
-    values (${householdId}, ${firstName}, ${lastName})
+    insert into guests (household_id, first_name, last_name, is_plus_one)
+    values (${householdId}, ${firstName}, ${lastName}, ${isPlusOne})
   `;
 
   revalidatePath("/admin");

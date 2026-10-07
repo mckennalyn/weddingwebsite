@@ -36,6 +36,7 @@ export type Guest = {
   household_id: string;
   first_name: string;
   last_name: string;
+  is_plus_one: boolean;
   rsvp_status: RsvpStatus;
   responded_at: string | null;
   created_at: string;
