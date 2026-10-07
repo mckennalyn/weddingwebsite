@@ -14,13 +14,15 @@ export type SearchResultHousehold = {
   guests: SearchResultGuest[];
 };
 
-// Public: guests search for their own invitation by name. Only names and
-// RSVP status are exposed here — never addresses.
-export async function searchInvitedGuests(
-  query: string
-): Promise<SearchResultHousehold[]> {
-  const q = query.trim();
-  if (q.length < 2) return [];
+// Public: a guest looks up their invitation by typing their full name. Only
+// an exact (case-insensitive) match on "first last" returns a party, so the
+// guest list can't be browsed by partial names. Only names and RSVP status are
+// exposed here — never addresses.
+export async function findHouseholdByFullName(
+  fullName: string
+): Promise<SearchResultHousehold | null> {
+  const name = fullName.trim().replace(/\s+/g, " ");
+  if (name.length < 3) return null;
 
   const sql = getDb();
   const rows = await sql<
@@ -35,33 +37,26 @@ export async function searchInvitedGuests(
     select h.id as household_id, g.id as guest_id, g.first_name, g.last_name, g.rsvp_status
     from guests g
     join households h on h.id = g.household_id
-    where h.id in (
+    where h.id = (
       select household_id from guests
-      where first_name ilike ${"%" + q + "%"} or last_name ilike ${"%" + q + "%"}
+      where lower(trim(first_name) || ' ' || trim(last_name)) = lower(${name})
+      order by id
+      limit 1
     )
-    order by h.id, g.last_name, g.first_name
+    order by g.last_name, g.first_name
   `;
 
-  const households = new Map<string, SearchResultHousehold>();
-  for (const row of rows) {
-    const existing = households.get(row.household_id);
-    const guest: SearchResultGuest = {
+  if (rows.length === 0) return null;
+
+  return {
+    householdId: rows[0].household_id,
+    guests: rows.map((row) => ({
       id: row.guest_id,
       firstName: row.first_name,
       lastName: row.last_name,
       rsvpStatus: row.rsvp_status,
-    };
-    if (existing) {
-      existing.guests.push(guest);
-    } else {
-      households.set(row.household_id, {
-        householdId: row.household_id,
-        guests: [guest],
-      });
-    }
-  }
-
-  return Array.from(households.values()).slice(0, 8);
+    })),
+  };
 }
 
 export type RsvpResponse = { guestId: string; attending: boolean };

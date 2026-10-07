@@ -6,7 +6,7 @@ export const couple = {
   partnerTwoFirstName: "Colin",
   weddingDateISO: "2027-01-02", // YYYY-MM-DD
   weddingDateDisplay: "January 2, 2027",
-  ceremonyTime: "4:00 PM", // update to your actual time
+  ceremonyTime: "4:30 PM", // update to your actual time
   venueName: "Siempre",
   venueAddress: "Draper, Utah",
   hashtag: "#McKennaAndColin",
@@ -14,10 +14,10 @@ export const couple = {
 };
 
 export const schedule: { time: string; label: string }[] = [
-  { time: "4:00 PM", label: "Ceremony" },
-  { time: "4:20 PM", label: "Cocktail Hour" },
-  { time: "5:00 PM", label: "Dinner" },
-  { time: "7:00 PM", label: "Send-Off" },
+  { time: "4:30 PM", label: "Ceremony" },
+  { time: "4:50 PM", label: "Cocktail Hour" },
+  { time: "5:30 PM", label: "Dinner" },
+  { time: "7:30 PM", label: "Send-Off" },
 ];
 
 export const faqs: { question: string; answer: string }[] = [

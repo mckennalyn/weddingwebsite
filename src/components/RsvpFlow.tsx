@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import {
-  searchInvitedGuests,
+  findHouseholdByFullName,
   submitRsvp,
   type SearchResultHousehold,
 } from "@/actions/rsvp";
@@ -13,50 +13,47 @@ function fullName(g: { firstName: string; lastName: string }) {
 
 export function RsvpFlow() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResultHousehold[]>([]);
   const [selected, setSelected] = useState<SearchResultHousehold | null>(null);
   const [responses, setResponses] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [searchError, setSearchError] = useState(false);
+  const [lookupError, setLookupError] = useState("");
   const [isSearching, startSearch] = useTransition();
   const [isSubmitting, startSubmit] = useTransition();
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (query.trim().length < 2) {
+  function handleLookup(e: React.FormEvent) {
+    e.preventDefault();
+    const name = query.trim();
+    if (name.split(/\s+/).length < 2) {
+      setLookupError("Please enter your first and last name.");
       return;
     }
-    debounceRef.current = setTimeout(() => {
-      startSearch(async () => {
-        try {
-          const found = await searchInvitedGuests(query);
-          setResults(found);
-          setSearchError(false);
-        } catch {
-          setSearchError(true);
+    setLookupError("");
+    startSearch(async () => {
+      try {
+        const household = await findHouseholdByFullName(name);
+        if (!household) {
+          setLookupError(
+            "We couldn't find an invitation under that name. Please check the spelling, or reach out to us directly."
+          );
+          return;
         }
-      });
-    }, 300);
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [query]);
-
-  const visibleResults = query.trim().length >= 2 ? results : [];
-
-  function chooseHousehold(household: SearchResultHousehold) {
-    setSelected(household);
-    setResults([]);
-    setQuery("");
-    const initial: Record<string, boolean> = {};
-    for (const guest of household.guests) {
-      if (guest.rsvpStatus !== "pending") {
-        initial[guest.id] = guest.rsvpStatus === "attending";
+        const initial: Record<string, boolean> = {};
+        for (const guest of household.guests) {
+          if (guest.rsvpStatus !== "pending") {
+            initial[guest.id] = guest.rsvpStatus === "attending";
+          }
+        }
+        setResponses(initial);
+        setStatus("idle");
+        setErrorMessage("");
+        setSelected(household);
+      } catch {
+        setLookupError(
+          "We couldn't reach the guest list just now. Please try again in a moment."
+        );
       }
-    }
-    setResponses(initial);
+    });
   }
 
   function handleSubmit() {
@@ -168,7 +165,11 @@ export function RsvpFlow() {
           </button>
           <button
             type="button"
-            onClick={() => setSelected(null)}
+            onClick={() => {
+              setSelected(null);
+              setQuery("");
+              setStatus("idle");
+            }}
             className="letter-wide border border-line px-4 py-2 text-xs font-medium uppercase text-ink/70 transition-colors hover:border-ink hover:text-ink"
           >
             Not your invitation? Search again
@@ -179,51 +180,36 @@ export function RsvpFlow() {
   }
 
   return (
-    <div>
-      <label className="letter-wide block text-center text-xs font-medium uppercase text-ink/75">
-        Find your invitation
+    <form onSubmit={handleLookup}>
+      <label
+        htmlFor="rsvp-name"
+        className="letter-wide block text-center text-xs font-medium uppercase text-ink/75"
+      >
+        Enter your full name
       </label>
       <input
+        id="rsvp-name"
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter your first or last name"
+        placeholder="First and last name"
         className="mt-4 w-full border-b border-line bg-transparent px-2 py-3 text-center font-display text-2xl text-ink outline-none focus:border-ink"
         autoComplete="off"
       />
 
-      {isSearching && (
-        <p className="mt-4 text-center text-sm text-ink/40">Searching...</p>
+      {lookupError && (
+        <p className="mt-4 text-center text-sm text-red-700">{lookupError}</p>
       )}
 
-      {searchError && (
-        <p className="mt-4 text-center text-sm text-red-700">
-          We couldn&apos;t reach the guest list just now. Please try again in
-          a moment.
-        </p>
-      )}
-
-      {!isSearching && !searchError && query.trim().length >= 2 && visibleResults.length === 0 && (
-        <p className="mt-4 text-center text-sm text-ink/50">
-          We couldn&apos;t find an invitation under that name. Please try a
-          different spelling, or reach out to us directly.
-        </p>
-      )}
-
-      <div className="mt-6 flex flex-col gap-3">
-        {visibleResults.map((household) => (
-          <button
-            key={household.householdId}
-            type="button"
-            onClick={() => chooseHousehold(household)}
-            className="border border-line px-6 py-4 text-left transition-colors hover:border-ink"
-          >
-            <p className="text-ink">
-              {household.guests.map(fullName).join(", ")}
-            </p>
-          </button>
-        ))}
+      <div className="mt-8 flex justify-center">
+        <button
+          type="submit"
+          disabled={isSearching || query.trim().length === 0}
+          className="letter-wide border border-ink bg-ink px-8 py-3 text-xs uppercase text-paper transition-colors hover:bg-paper hover:text-ink disabled:opacity-50"
+        >
+          {isSearching ? "Searching..." : "Continue"}
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
