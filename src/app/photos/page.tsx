@@ -6,20 +6,17 @@ import { PolaroidFrame } from "@/components/PolaroidFrame";
 export const metadata: Metadata = { title: "Photos" };
 export const dynamic = "force-dynamic";
 
-const PLACEHOLDER_COUNT = 6;
+const ENGAGEMENT_PHOTO_COUNT = 9;
 
-function PlaceholderTile({ index }: { index: number }) {
-  // Tile 0 is a real engagement photo shown in color; the rest are
-  // generic stock placeholders kept in the site's grayscale look.
-  const isRealPhoto = index === 0;
+function EngagementTile({ index }: { index: number }) {
   return (
     <PolaroidFrame tiltIndex={index}>
       <Image
-        src={`/photo-placeholder-${index + 1}.jpg`}
+        src={`/engagement-${index + 1}.jpg`}
         alt=""
         fill
-        className={`object-cover ${isRealPhoto ? "" : "grayscale contrast-125"}`}
-        sizes="(min-width: 640px) 33vw, 50vw"
+        className="object-cover"
+        sizes="(min-width: 1024px) 320px, 33vw"
       />
     </PolaroidFrame>
   );
@@ -30,7 +27,7 @@ export default async function PhotosPage() {
   try {
     photos = await getPhotos();
   } catch {
-    // Database isn't connected yet — fall through to placeholder tiles.
+    // Database isn't connected yet — fall through to engagement photos.
   }
 
   return (
@@ -40,9 +37,9 @@ export default async function PhotosPage() {
       </h1>
 
       {photos.length === 0 ? (
-        <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
-          {Array.from({ length: PLACEHOLDER_COUNT }).map((_, i) => (
-            <PlaceholderTile key={i} index={i} />
+        <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-6">
+          {Array.from({ length: ENGAGEMENT_PHOTO_COUNT }).map((_, i) => (
+            <EngagementTile key={i} index={i} />
           ))}
         </div>
       ) : (
