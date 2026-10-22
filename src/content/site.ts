@@ -42,11 +42,6 @@ export const faqs: { question: string; answer: string }[] = [
     question: "By when should I RSVP?",
     answer: `Please reply through this site by ${couple.rsvpByDisplay}, so we can finalize our arrangements.`,
   },
-  {
-    question: "Who should I contact if I have other questions not answered here?",
-    answer:
-      "If you have additional questions, please reach out to McKenna, Colin, or either of our parents. We're happy to help.",
-  },
 ];
 
 export const registry: {
