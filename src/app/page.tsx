@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { couple } from "@/content/site";
-import { getPhotos } from "@/actions/photos";
-
-export const dynamic = "force-dynamic";
 
 const links = [
   { href: "/", label: "Home" },
@@ -13,23 +10,23 @@ const links = [
   { href: "/registry", label: "Registry" },
 ];
 
-export default async function HomePage() {
-  let heroSrc = "/hero-placeholder.jpg";
-  try {
-    const photos = await getPhotos();
-    if (photos[0]) heroSrc = photos[0].url;
-  } catch {
-    // Database isn't connected yet — fall back to the bundled placeholder.
-  }
-
+export default function HomePage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-ink">
+      {/* Vertical photo for phones, horizontal photo for wider screens. */}
       <Image
-        src={heroSrc}
+        src="/hero-mobile.jpg"
         alt=""
         fill
         priority
-        className="object-cover object-[center_8%]"
+        className="object-cover object-[center_20%] sm:hidden"
+      />
+      <Image
+        src="/hero-desktop.jpg"
+        alt=""
+        fill
+        priority
+        className="hidden object-cover object-center sm:block"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/75" />
 

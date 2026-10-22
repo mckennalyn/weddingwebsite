@@ -43,7 +43,7 @@ export default function FaqPage() {
             src="/faq-details.jpg"
             alt=""
             fill
-            className="object-cover"
+            className="object-cover object-[75%_center]"
           />
         </PolaroidFrame>
 
