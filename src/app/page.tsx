@@ -28,9 +28,9 @@ export default function HomePage() {
         priority
         className="hidden object-cover object-center sm:block"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/75" />
+      <div className="absolute inset-0 bg-black/45" />
 
-      <nav className="relative z-10 flex flex-wrap items-center justify-center gap-8 pt-11 sm:gap-13">
+      <nav className="relative z-10 flex [text-shadow:0_1px_6px_rgba(0,0,0,0.7)] flex-wrap items-center justify-center gap-8 pt-11 sm:gap-13">
         {links.map((link) => (
           <Link
             key={link.href}
@@ -38,7 +38,7 @@ export default function HomePage() {
             className={`letter-wide text-xs font-medium uppercase transition-colors ${
               link.href === "/"
                 ? "border-b border-paper pb-1 text-paper"
-                : "text-paper/70 hover:text-paper"
+                : "text-paper/85 hover:text-paper"
             }`}
           >
             {link.label}
@@ -46,25 +46,25 @@ export default function HomePage() {
         ))}
       </nav>
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-6 text-center">
-        <p className="letter-wide text-xs font-medium uppercase text-paper/90">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-6 text-center [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
+        <p className="letter-wide text-xs font-medium uppercase text-paper">
           The Wedding Of
         </p>
         <h1 className="mt-5 font-display text-6xl leading-[0.92] font-normal text-paper italic sm:text-8xl">
           <div>{couple.partnerOneFirstName}</div>
-          <div className="my-4 text-2xl font-medium text-paper/90 sm:text-4xl">&amp;</div>
+          <div className="my-4 text-2xl font-medium text-paper sm:text-4xl">&amp;</div>
           <div>{couple.partnerTwoFirstName}</div>
         </h1>
         <div className="my-8 h-px w-15 bg-paper/40" aria-hidden />
         <p className="font-display text-xl text-paper sm:text-2xl">
           {couple.weddingDateDisplay}
         </p>
-        <p className="letter-wide mt-2 mb-10 text-xs font-medium uppercase text-paper/90">
+        <p className="letter-wide mt-2 mb-10 text-xs font-medium uppercase text-paper">
           {couple.venueName} &middot; {couple.venueAddress}
         </p>
         <Link
           href="/rsvp"
-          className="letter-wide bg-paper px-13 py-4.5 text-xs uppercase text-ink"
+          className="letter-wide bg-paper px-13 py-4.5 text-xs uppercase text-ink [text-shadow:none]"
         >
           RSVP
         </Link>
