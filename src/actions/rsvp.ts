@@ -1,6 +1,8 @@
 "use server";
 
+import { after } from "next/server";
 import { getDb, type RsvpStatus } from "@/lib/db";
+import { notifyRsvpChanges, type RsvpChange } from "@/lib/notify";
 
 export type SearchResultGuest = {
   id: string;
@@ -83,8 +85,16 @@ export async function submitRsvp(
   const guestIds = responses.map((r) => r.guestId);
 
   // Only ever write to guests that actually belong to this household.
-  const validGuests = await sql<{ id: string; is_plus_one: boolean }[]>`
-    select id, is_plus_one from guests
+  const validGuests = await sql<
+    {
+      id: string;
+      is_plus_one: boolean;
+      first_name: string;
+      last_name: string;
+      rsvp_status: RsvpStatus;
+    }[]
+  >`
+    select id, is_plus_one, first_name, last_name, rsvp_status from guests
     where household_id = ${householdId} and id in ${sql(guestIds)}
   `;
   const validIds = new Set(validGuests.map((g) => g.id));
@@ -106,8 +116,19 @@ export async function submitRsvp(
     return { success: false, error: "Invitation not found." };
   }
 
+  const previous = new Map(validGuests.map((g) => [g.id, g]));
+  const changes: RsvpChange[] = [];
+
   for (const { guestId, attending, firstName, lastName } of responses) {
     if (!validIds.has(guestId)) continue;
+    const before = previous.get(guestId)!;
+    const newStatus = attending ? "attending" : "declined";
+    if (before.rsvp_status !== newStatus) {
+      const name = plusOneIds.has(guestId) && attending
+        ? `${firstName!.trim()} ${lastName!.trim()} (plus-one)`
+        : `${before.first_name} ${before.last_name}`.trim() || "Plus-one";
+      changes.push({ name, from: before.rsvp_status, to: newStatus });
+    }
     if (plusOneIds.has(guestId) && attending) {
       await sql`
         update guests
@@ -125,6 +146,8 @@ export async function submitRsvp(
       where id = ${guestId}
     `;
   }
+
+  if (changes.length > 0) after(() => notifyRsvpChanges(changes));
 
   return { success: true };
 }
