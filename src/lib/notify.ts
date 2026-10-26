@@ -16,7 +16,7 @@ export async function notifyRsvpChanges(changes: RsvpChange[]) {
   const from =
     process.env.RSVP_NOTIFY_FROM ?? "Wedding RSVP <onboarding@resend.dev>";
 
-  const lines = changes.map((c) => `${c.name}: ${c.from} → ${c.to}`);
+  const lines = changes.map((c) => `${c.name} changed their response from ${c.from} to ${c.to}.`);
   const subject =
     changes.length === 1
       ? `RSVP: ${changes[0].name} is now ${changes[0].to}`
