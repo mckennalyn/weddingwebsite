@@ -8,7 +8,7 @@ import {
 } from "@/actions/rsvp";
 
 function fullName(g: { firstName: string; lastName: string }) {
-  return `${g.firstName} ${g.lastName}`;
+  return `${g.firstName} ${g.lastName}`.trim();
 }
 
 export function RsvpFlow() {

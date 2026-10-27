@@ -47,7 +47,7 @@ export async function createHousehold(formData: FormData) {
 
   const guestPairs = firstNames
     .map((first, i) => ({ first, last: lastNames[i] ?? "" }))
-    .filter((g) => g.first.length > 0 && g.last.length > 0);
+    .filter((g) => g.first.length > 0);
 
   if (!label || guestPairs.length === 0) {
     throw new Error("A household needs a label and at least one guest.");
@@ -110,8 +110,8 @@ export async function addGuestToHousehold(
   const lastName = String(formData.get("lastName") ?? "").trim();
   const isPlusOne = formData.get("isPlusOne") === "on";
   // A plus-one's name is optional: the guest fills it in when they RSVP.
-  if (!isPlusOne && (!firstName || !lastName)) {
-    throw new Error("Guest needs a first and last name.");
+  if (!isPlusOne && !firstName) {
+    throw new Error("Guest needs a first name.");
   }
 
   await sql`

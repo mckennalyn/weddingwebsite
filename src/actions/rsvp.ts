@@ -44,7 +44,7 @@ export async function findHouseholdByFullName(
     where h.id = (
       select household_id from guests
       where not is_plus_one
-        and lower(trim(first_name) || ' ' || trim(last_name)) = lower(${name})
+        and lower(trim(trim(first_name) || ' ' || trim(last_name))) = lower(trim(${name}))
       order by id
       limit 1
     )

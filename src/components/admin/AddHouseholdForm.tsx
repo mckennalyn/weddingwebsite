@@ -114,8 +114,7 @@ export function AddHouseholdForm() {
                 name="guestLastName"
                 value={row.lastName}
                 onChange={(e) => updateRow(i, "lastName", e.target.value)}
-                placeholder="Last name"
-                required
+                placeholder="Last name (optional)"
                 className="flex-1 border border-line px-4 py-2 text-ink outline-none placeholder:text-ink/70 focus:border-ink"
               />
               {guestRows.length > 1 && (
